@@ -1,0 +1,22 @@
+running = True
+def Run(b):
+    global running, remember_dt,dt
+    running = not running
+    if running:
+        b.text = "Pause"
+        dt = remember_dt
+    else:
+        b.text = "Run"
+        remember_dt = dt
+        dt =0
+    return
+
+button(text="Pause",pos=scene.title_anchor,bind=Run)
+ball = sphere(radius = 0.1, color = color.red,make_trail=True)
+
+dt = 0.1
+t = 0
+while(True):
+    rate(10)
+    ball.pos = vector(cot(t),sin(t),cost(t/2))
+    t +=dt
