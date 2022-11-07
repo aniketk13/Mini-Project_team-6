@@ -12,11 +12,5 @@ def Run(b):
     return
 
 button(text="Pause",pos=scene.title_anchor,bind=Run)
-b = sphere(radius = 0.1, color = color.red,make_trail=True)
+b = (checker(),make_trail=True)
 
-dt = 0.1
-t = 0
-while(True):
-    rate(10)
-    b.pos = vector(cot(t),sin(t),cost(t/2))
-    t +=dt
