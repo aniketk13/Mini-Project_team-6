@@ -1,6 +1,6 @@
 from tkinter import *
 from datetime import date
-import mysql.connector
+
 from PIL import ImageTk,Image #PIL -> Pillow
 from tkinter import messagebox
 
