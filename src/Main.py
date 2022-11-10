@@ -1,10 +1,17 @@
 from tkinter import *
 from datetime import date
+import pygame
+from pygame.locals import *
+from pygame import mixer
 
 
 from PIL import ImageTk, Image  # PIL -> Pillow
 from tkinter import messagebox
 
+pygame.init()
+mixer.init()
+mixer.music.load('bgmusic.mp3')
+mixer.music.play()
 root = Tk()
 root.title("Library")
 root.minsize(width=1000, height=800)
