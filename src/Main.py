@@ -45,7 +45,7 @@ headingLabel = Label(headingFrame1, text="CHECKERS",
 headingLabel.place(relx=0, rely=0, relwidth=1, relheight=1)
 
 
-def tries():
+def game():
 
    # root.quit()
     import Checkers_GUI
@@ -54,7 +54,7 @@ def tries():
 def rules():
 
     root = Tk()
-    root.title("Library")
+    root.title("RULES")
     root.minsize(width=400, height=400)
     root.geometry("1800x1180")
 
@@ -106,13 +106,61 @@ def rules():
     quitBtn.place(relx=0.4, rely=0.9, relwidth=0.18, relheight=0.08)
 
     root.mainloop()
-    root.destroy()
+    
+
+def about():
+
+    root = Tk()
+    root.title("ABOUT")
+    root.minsize(width=400, height=400)
+    root.geometry("1800x1180")
+
+    Canvas1 = Canvas(root)
+    Canvas1.config(bg="#25b89a")
+    Canvas1.pack(expand=True, fill=BOTH)
+
+    headingFrame1 = Frame(root, bg="black", bd=5)
+    headingFrame1.place(relx=0.25, rely=0.05, relwidth=0.5, relheight=0.10)
+
+    headingLabel = Label(headingFrame1, text="RULES",
+                         bg='cyan', fg='black', font=('Courier', 17))
+
+    headingLabel.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+    labelFrame = Frame(root, bg='grey')
+    labelFrame.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
+    y = 0.35
+
+    Label(labelFrame, text="HOW TO USE THE APP", bg='grey', fg='white',
+          font=('Courier', 25, 'bold')).place(relx=0.35, rely=0.05)
+    Label(labelFrame, text=" TO CHECK THE RULES CLICK ON RULES BUTTON ",
+          bg='grey', fg='white', font=('Courier', 13)).place(relx=0.02, rely=0.15)
+    Label(labelFrame, text="After you know the rules click on the play game option ",
+          bg='grey', fg='white', font=('Courier', 13)).place(relx=0.02, rely=0.20)
+    Label(labelFrame, text="In the game section click on settings and add your names",
+          bg='grey', fg='white', font=('Courier', 13)).place(relx=0.04, rely=0.25)
+    Label(labelFrame, text="After that click on play option to start playing",
+          bg='grey', fg='white', font=('Courier', 13)).place(relx=0.04, rely=0.30)
+    Label(labelFrame, text="PLAY as per the rules for additional help a help box will show messages to help you",
+          bg='grey', fg='white', font=('Courier', 13)).place(relx=0.04, rely=0.35)
+
+    Label(labelFrame, text="After you play the game you can check your high scores",
+          bg='grey', fg='white', font=('Courier', 13)).place(relx=0.04, rely=0.50)
+    Label(labelFrame, text="After you have finished playing then you can click on exit button to exit game",
+          bg='grey', fg='white', font=('Courier', 13)).place(relx=0.04, rely=0.55)
+    
+    quitBtn = Button(root, text="Quit", bg='#FF5733', fg='black',
+                     font=('Courier', 30, 'bold'), command=root.destroy)
+    quitBtn.place(relx=0.4, rely=0.9, relwidth=0.18, relheight=0.08)
+
+    root.mainloop()
+
 
 # adding buttons
 
 
 btn1 = Button(root, text="Play Game", bg='black', fg='white', font=(
-    'Courier', 60), command=lambda: [root.destroy(), tries()])
+    'Courier', 60), command=lambda: [root.destroy(), game()])
 btn1.place(relx=0.35, rely=0.39, relwidth=0.35, relheight=0.1)
 
 btn2 = Button(root, text="RULES", bg='black', fg='white',
@@ -120,7 +168,7 @@ btn2 = Button(root, text="RULES", bg='black', fg='white',
 btn2.place(relx=0.35, rely=0.59, relwidth=0.35, relheight=0.1)
 
 btn3 = Button(root, text="ABOUT", bg='black', fg='white',
-              font=('Courier', 60), command=tries)
+              font=('Courier', 60), command=about)
 btn3.place(relx=0.35, rely=0.79, relwidth=0.35, relheight=0.1)
 
 root.mainloop()

@@ -13,16 +13,16 @@ class Menu(Frame):
         self.menuFrame = Frame(width=240, height=80)
         self.menuFrame.pack(expand=1, fill=BOTH, side=TOP)
         self.menuFrame.pack_propagate(0)
-        self.button1 = Button(self.menuFrame, text="Play!",bg='black',fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button1 = Button(self.menuFrame, text="Play!",bg='cadetblue4',fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.start_game, cursor="sailboat", relief=RIDGE,)
         self.button1.pack()
 
         
-        self.button2 = Button(self.menuFrame, text="Settings",bg="black",fg="white" ,font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button2 = Button(self.menuFrame, text="Settings",bg='cadetblue4',fg='lightgrey' ,font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_settings, relief=RIDGE,)
         self.button2.pack()
         
-        self.button3 = Button(self.menuFrame, text="Highscore",bg='black',fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button3 = Button(self.menuFrame, text="Highscore",bg='cadetblue4',fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_high_score, relief=RIDGE,)
         self.button3.pack()
         
