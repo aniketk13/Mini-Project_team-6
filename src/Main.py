@@ -106,7 +106,7 @@ def rules():
     quitBtn.place(relx=0.4, rely=0.9, relwidth=0.18, relheight=0.08)
 
     root.mainloop()
-    
+
 
 def about():
 
@@ -148,7 +148,7 @@ def about():
           bg='grey', fg='white', font=('Courier', 13)).place(relx=0.04, rely=0.50)
     Label(labelFrame, text="After you have finished playing then you can click on exit button to exit game",
           bg='grey', fg='white', font=('Courier', 13)).place(relx=0.04, rely=0.55)
-    
+
     quitBtn = Button(root, text="Quit", bg='#FF5733', fg='black',
                      font=('Courier', 30, 'bold'), command=root.destroy)
     quitBtn.place(relx=0.4, rely=0.9, relwidth=0.18, relheight=0.08)

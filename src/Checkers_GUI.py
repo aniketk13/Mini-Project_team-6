@@ -1,7 +1,9 @@
 from tkinter import *
 from itertools import product
 from Checkers import *
-
+import pygame
+from pygame.locals import *
+from pygame import mixer
 
 
 class Menu(Frame):
@@ -9,34 +11,40 @@ class Menu(Frame):
 
     def __init__(self):
         Frame.__init__(self)
-       
+
         self.menuFrame = Frame(width=240, height=80)
         self.menuFrame.pack(expand=1, fill=BOTH, side=TOP)
         self.menuFrame.pack_propagate(0)
-        self.button1 = Button(self.menuFrame, text="Play!",bg='cadetblue4',fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button1 = Button(self.menuFrame, text="Play!", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.start_game, cursor="sailboat", relief=RIDGE,)
         self.button1.pack()
 
-        
-        self.button2 = Button(self.menuFrame, text="Settings",bg='cadetblue4',fg='lightgrey' ,font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button2 = Button(self.menuFrame, text="Settings", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_settings, relief=RIDGE,)
         self.button2.pack()
-        
-        self.button3 = Button(self.menuFrame, text="Highscore",bg='cadetblue4',fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
+
+        self.button3 = Button(self.menuFrame, text="Highscore", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_high_score, relief=RIDGE,)
         self.button3.pack()
-        
-        self.button4 = Button(self.menuFrame, text="Exit",bg='black',fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
+
+        self.button4 = Button(self.menuFrame, text="Exit", bg='black', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.destroy, cursor="cross", relief=RIDGE,)
         self.button4.pack()
 
+        self.button5 = Button(self.menuFrame, text="Mute", bg='black', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
+                              command=board.muteMusic, cursor="cross", relief=RIDGE,)
+        self.button5.pack()
+
         self.settingsFrame = Frame(width=220, height=100)
 
-        self.labelNames1 = Label(self.settingsFrame, text="Player Names",bg="black",fg="white", font="bold", relief=RIDGE)
+        self.labelNames1 = Label(self.settingsFrame, text="Player Names",
+                                 bg="black", fg="white", font="bold", relief=RIDGE)
         self.labelNames1.grid(row=0, column=1, sticky=W)
-        self.labelNames2 = Label(self.settingsFrame, text="Player 1",bg="black",fg="white", font="bold")
+        self.labelNames2 = Label(
+            self.settingsFrame, text="Player 1", bg="black", fg="white", font="bold")
         self.labelNames2.grid(row=1, column=0, sticky=W)
-        self.labelNames3 = Label(self.settingsFrame, text="Player 2",bg="black",fg="white", font="bold")
+        self.labelNames3 = Label(
+            self.settingsFrame, text="Player 2", bg="black", fg="white", font="bold")
         self.labelNames3.grid(row=2, column=0, sticky=W)
         self.nameEntry1 = Entry(self.settingsFrame, width=12)
         self.nameEntry1.grid(row=1, column=1, sticky=W)
@@ -49,15 +57,9 @@ class Menu(Frame):
 
         self.mode = IntVar()
 
-       
-
         self.board_size_ = IntVar()
 
-        
-
         self.piece_color = IntVar()
-
-        
 
 
 class Board(Tk):
@@ -72,12 +74,14 @@ class Board(Tk):
 
         self.textFrame = Frame(width=200, height=20)
         self.textFrame.pack(expand=1, fill=BOTH, side=RIGHT)
-        self.textForUser = Text(self.textFrame, width=20, height=4, bg="black",fg='white', font=("verdana", "18"), wrap=WORD)
+        self.textForUser = Text(self.textFrame, width=20, height=4,
+                                bg="black", fg='white', font=("verdana", "18"), wrap=WORD)
         self.textForUser.pack()
         self.textForUser.insert(END, "Welcome to checkers!")
         self.textForUser.config(state=DISABLED)
 
-        self.highScoreText = Text(self.textFrame, width=23, height=30, bg='black',fg='white', font=("verdana", "16"), wrap=WORD)
+        self.highScoreText = Text(self.textFrame, width=23, height=30,
+                                  bg='black', fg='white', font=("verdana", "16"), wrap=WORD)
 
         self.player1_name = "Player 1"
         self.player2_name = "Player 2"
@@ -184,7 +188,6 @@ class Board(Tk):
         '''
 
         time_list_8 = []
-        
 
         with open('Highscore.txt', 'r') as f:
             score_list = [line.split(' ') for line in f.read().splitlines()]
@@ -192,13 +195,11 @@ class Board(Tk):
                 for lists in score_list:
                     if lists[1] == "8x8":
                         time_list_8.append([lists[2], lists[0], lists[1]])
-                    
-                        
+
         if len(score_list) > 0:
             time_list_8.sort()
             # Only keeps the 10 best times
             time_list_8 = time_list_8[:10]
-
 
             self.highScoreText.config(state=NORMAL)
             self.highScoreText.delete(0.0, END)
@@ -209,10 +210,9 @@ class Board(Tk):
                 # Converts seconds into minutes and seconds
                 m, s = divmod(int(time_list_8[times][0]), 60)
                 if time_list_8[times][2] == "8x8":
-                    self.highScoreText.insert(END, "%d min %02d s  " % (m, s) + " " + time_list_8[times][1] + "\n")
+                    self.highScoreText.insert(END, "%d min %02d s  " % (
+                        m, s) + " " + time_list_8[times][1] + "\n")
 
-            
-           
         self.highScoreText.config(state=DISABLED)
         return
 
@@ -229,6 +229,9 @@ class Board(Tk):
             self.highScoreText.pack()
         return
 
+    def muteMusic(self):
+        mixer.music.stop()
+
     def player_turn_text(self):
         '''Writes which player turn it is to move.
 
@@ -241,28 +244,30 @@ class Board(Tk):
                 if menu.nameEntry1.index("end") != 0:
                     self.player1_name = menu.nameEntry1.get()
                     if self.player1_name[-1] == "s":
-                        self.enter_text_for_user("It is " + str(self.player1_name) + "' turn to move")
+                        self.enter_text_for_user(
+                            "It is " + str(self.player1_name) + "' turn to move")
                     else:
-                        self.enter_text_for_user("It is " + str(self.player1_name) + "'s turn to move")
+                        self.enter_text_for_user(
+                            "It is " + str(self.player1_name) + "'s turn to move")
                 else:
-                    self.enter_text_for_user("It is " + str(self.player1_name) + "'s turn to move")
+                    self.enter_text_for_user(
+                        "It is " + str(self.player1_name) + "'s turn to move")
 
         else:
             if self.mode == 1 or self.mode == 3:
                 if len(menu.nameEntry2.get()) != 0:
                     self.player2_name = menu.nameEntry2.get()
                     if self.player2_name[-1] == "s":
-                        self.enter_text_for_user("It is " + str(self.player2_name) + "' turn to move")
+                        self.enter_text_for_user(
+                            "It is " + str(self.player2_name) + "' turn to move")
                     else:
-                        self.enter_text_for_user("It is " + str(self.player2_name) + "'s turn to move")
+                        self.enter_text_for_user(
+                            "It is " + str(self.player2_name) + "'s turn to move")
                 else:
-                    self.enter_text_for_user("It is " + str(self.player2_name) + "'s turn to move")
+                    self.enter_text_for_user(
+                        "It is " + str(self.player2_name) + "'s turn to move")
         return
 
-
-       
-       
-        
         return
 
     def clean_up_images(self):
@@ -363,7 +368,8 @@ class Board(Tk):
         :return: (nothing)
         '''
 
-        piece_ID = self.get_piece_ID(PlainPiece.jump_again_list[0][0], PlainPiece.jump_again_list[0][1])
+        piece_ID = self.get_piece_ID(
+            PlainPiece.jump_again_list[0][0], PlainPiece.jump_again_list[0][1])
         red_king = PhotoImage(file="red_king_high.gif")
         black_king = PhotoImage(file="black_king_high.gif")
 
@@ -493,8 +499,6 @@ class Board(Tk):
                 self.move_AI()
         return
 
-   
-
     def switch_player_turn(self):
         '''Switches the player turn.
 
@@ -525,12 +529,16 @@ class Board(Tk):
                 self.enter_text_for_user("Too bad:(... \nAI wins!!")
             elif self.current_player == 1 and self.mode == 1:
                 self.end_time = time()
-                add_high_score(self.player2_name, self.board_size, self.start_time, self.end_time)
-                self.enter_text_for_user("Congratulations!\n" + self.player2_name + " wins!")
+                add_high_score(self.player2_name, self.board_size,
+                               self.start_time, self.end_time)
+                self.enter_text_for_user(
+                    "Congratulations!\n" + self.player2_name + " wins!")
             elif self.current_player == 2 and (self.mode == 1 or self.mode == 2):
                 self.end_time = time()
-                add_high_score(self.player1_name, self.board_size, self.start_time, self.end_time)
-                self.enter_text_for_user("Congratulations!\n" + self.player1_name + " wins!")
+                add_high_score(self.player1_name, self.board_size,
+                               self.start_time, self.end_time)
+                self.enter_text_for_user(
+                    "Congratulations!\n" + self.player1_name + " wins!")
             self.game_over = True
             self.print_current_board()
             return True
@@ -550,8 +558,10 @@ class Board(Tk):
                 y2 = y1 + self.cell_size
                 if row % 2 == 0:
                     if column % 2 != 0:
-                        piece = self.canvas.create_oval(x1, y1, x2, y2, fill=self.color2, outline="black")
-                        self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
+                        piece = self.canvas.create_oval(
+                            x1, y1, x2, y2, fill=self.color2, outline="black")
+                        self.canvas.tag_bind(
+                            piece, "<ButtonPress-1>", self.on_click)
                         # Appends the ID of the piece along with their coordinates in a tuple to a list
                         self.piece_on_board.append((piece, column, row))
                         new_piece = [column, row]
@@ -560,8 +570,10 @@ class Board(Tk):
                 elif row % 2 != 0:
 
                     if column % 2 == 0:
-                        piece = self.canvas.create_oval(x1, y1, x2, y2, fill=self.color2, outline="black")
-                        self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
+                        piece = self.canvas.create_oval(
+                            x1, y1, x2, y2, fill=self.color2, outline="black")
+                        self.canvas.tag_bind(
+                            piece, "<ButtonPress-1>", self.on_click)
                         self.piece_on_board.append((piece, column, row))
                         new_piece = [column, row]
                         PlainPiece.pieces_dict[2].append(new_piece)
@@ -581,16 +593,20 @@ class Board(Tk):
                 y2 = y1 + self.cell_size
                 if row % 2 == 0:
                     if column % 2 != 0:
-                        piece = self.canvas.create_oval(x1, y1, x2, y2, fill=self.color1, outline="black")
-                        self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
+                        piece = self.canvas.create_oval(
+                            x1, y1, x2, y2, fill=self.color1, outline="black")
+                        self.canvas.tag_bind(
+                            piece, "<ButtonPress-1>", self.on_click)
                         self.piece_on_board.append((piece, column, row))
                         new_piece = [column, row]
                         PlainPiece.pieces_dict[1].append(new_piece)
                 elif row % 2 != 0:
 
                     if column % 2 == 0:
-                        piece = self.canvas.create_oval(x1, y1, x2, y2, fill=self.color1, outline="black")
-                        self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
+                        piece = self.canvas.create_oval(
+                            x1, y1, x2, y2, fill=self.color1, outline="black")
+                        self.canvas.tag_bind(
+                            piece, "<ButtonPress-1>", self.on_click)
                         self.piece_on_board.append((piece, column, row))
                         new_piece = [column, row]
                         PlainPiece.pieces_dict[1].append(new_piece)
@@ -624,8 +640,10 @@ class Board(Tk):
             x2 = x1 + self.cell_size
             y2 = y1 + self.cell_size
             color = "powderblue" if i % 2 == j % 2 else "darkgray"
-            squares = self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline="lime")
-            self.canvas.tag_bind(squares, "<ButtonPress-1>", self.on_click_square)
+            squares = self.canvas.create_rectangle(
+                x1, y1, x2, y2, fill=color, outline="lime")
+            self.canvas.tag_bind(
+                squares, "<ButtonPress-1>", self.on_click_square)
         return
 
     def print_current_board(self):
@@ -660,13 +678,19 @@ class Board(Tk):
                 x2 = x1 + self.cell_size
                 y2 = y1 + self.cell_size
                 if player == 1:
-                    piece = self.canvas.create_oval(x1, y1, x2, y2, fill=self.color1, outline="black")
-                    self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
-                    self.piece_on_board.append((piece, coordinate[0], coordinate[1]))
+                    piece = self.canvas.create_oval(
+                        x1, y1, x2, y2, fill=self.color1, outline="black")
+                    self.canvas.tag_bind(
+                        piece, "<ButtonPress-1>", self.on_click)
+                    self.piece_on_board.append(
+                        (piece, coordinate[0], coordinate[1]))
                 elif player == 2:
-                    piece = self.canvas.create_oval(x1, y1, x2, y2, fill=self.color2, outline="black")
-                    self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
-                    self.piece_on_board.append((piece, coordinate[0], coordinate[1]))
+                    piece = self.canvas.create_oval(
+                        x1, y1, x2, y2, fill=self.color2, outline="black")
+                    self.canvas.tag_bind(
+                        piece, "<ButtonPress-1>", self.on_click)
+                    self.piece_on_board.append(
+                        (piece, coordinate[0], coordinate[1]))
         return
 
     def print_king_pieces(self):
@@ -687,26 +711,38 @@ class Board(Tk):
                 if player == 1:
                     # If the selected color is red and black a the kings has a special picture
                     if self.color1 == "cadetblue4" and self.color2 == "black":
-                        piece = self.canvas.create_image(x1, y1, image=red_king, anchor=NW)
-                        self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
+                        piece = self.canvas.create_image(
+                            x1, y1, image=red_king, anchor=NW)
+                        self.canvas.tag_bind(
+                            piece, "<ButtonPress-1>", self.on_click)
 
                         self.reference_dict[piece] = red_king
-                        self.piece_on_board.append((piece, coordinate[0], coordinate[1]))
+                        self.piece_on_board.append(
+                            (piece, coordinate[0], coordinate[1]))
                     else:
-                        piece = self.canvas.create_oval(x1, y1, x2, y2, fill=self.color1, outline="black")
-                        self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
-                        self.piece_on_board.append((piece, coordinate[0], coordinate[1]))
+                        piece = self.canvas.create_oval(
+                            x1, y1, x2, y2, fill=self.color1, outline="black")
+                        self.canvas.tag_bind(
+                            piece, "<ButtonPress-1>", self.on_click)
+                        self.piece_on_board.append(
+                            (piece, coordinate[0], coordinate[1]))
                 elif player == 2:
                     if self.color1 == "cadetblue4" and self.color2 == "black":
-                        piece = self.canvas.create_image(x1, y1, image=black_king, anchor=NW)
-                        self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
+                        piece = self.canvas.create_image(
+                            x1, y1, image=black_king, anchor=NW)
+                        self.canvas.tag_bind(
+                            piece, "<ButtonPress-1>", self.on_click)
 
                         self.reference_dict[piece] = black_king
-                        self.piece_on_board.append((piece, coordinate[0], coordinate[1]))
+                        self.piece_on_board.append(
+                            (piece, coordinate[0], coordinate[1]))
                     else:
-                        piece = self.canvas.create_oval(x1, y1, x2, y2, fill=self.color2, outline="black")
-                        self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
-                        self.piece_on_board.append((piece, coordinate[0], coordinate[1]))
+                        piece = self.canvas.create_oval(
+                            x1, y1, x2, y2, fill=self.color2, outline="black")
+                        self.canvas.tag_bind(
+                            piece, "<ButtonPress-1>", self.on_click)
+                        self.piece_on_board.append(
+                            (piece, coordinate[0], coordinate[1]))
         return
 
     def print_board_when_finished(self):
@@ -725,9 +761,11 @@ class Board(Tk):
                 x2 = x1 + self.cell_size
                 y2 = y1 + self.cell_size
                 if player == 1:
-                    self.canvas.create_oval(x1, y1, x2, y2, fill=self.color1, outline="black")
+                    self.canvas.create_oval(
+                        x1, y1, x2, y2, fill=self.color1, outline="black")
                 elif player == 2:
-                    self.canvas.create_oval(x1, y1, x2, y2, fill=self.color2, outline="black")
+                    self.canvas.create_oval(
+                        x1, y1, x2, y2, fill=self.color2, outline="black")
         for player in PlainPiece.king_pieces_dict:
             for coordinate in PlainPiece.king_pieces_dict[player]:
                 x1 = (coordinate[0] * self.cell_size)
@@ -736,28 +774,33 @@ class Board(Tk):
                 y2 = y1 + self.cell_size
                 if player == 1:
                     if self.color1 == "cadetblue4" and self.color2 == "black":
-                        self.canvas.create_image(x1, y1, image=red_king, anchor=NW)
+                        self.canvas.create_image(
+                            x1, y1, image=red_king, anchor=NW)
                         self.canvas.photo = red_king
                     else:
-                        self.canvas.create_oval(x1, y1, x2, y2, fill=self.color1, outline="black")
+                        self.canvas.create_oval(
+                            x1, y1, x2, y2, fill=self.color1, outline="black")
                 elif player == 2:
                     if self.color1 == "cadetblue4" and self.color2 == "black":
-                        self.canvas.create_image(x1, y1, image=black_king, anchor=NW)
+                        self.canvas.create_image(
+                            x1, y1, image=black_king, anchor=NW)
                         self.canvas.photo = black_king
                     else:
-                        self.canvas.create_oval(x1, y1, x2, y2, fill=self.color2, outline="black")
+                        self.canvas.create_oval(
+                            x1, y1, x2, y2, fill=self.color2, outline="black")
 
 
 board = Board()
 menu = Menu()
 
+
 def run():
     board.title("Checkers")
-    
+
     board.print_background_board()
     board.print_start_board()
     menu.mainloop()
     board.mainloop()
-run()
 
-    
+
+run()
