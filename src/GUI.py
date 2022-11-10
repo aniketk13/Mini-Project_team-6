@@ -16,15 +16,15 @@ class Menu(Frame):
         self.menuFrame.pack(expand=1, fill=BOTH, side=TOP)
         self.menuFrame.place(relx=0.02, rely=0.80,
                              relwidth=0.95, relheight=0.2)
-        self.button1 = Button(self.menuFrame, text="Play!", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button1 = Button(self.menuFrame, text="Play!", bg='cadetblue4', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.start_game, cursor="sailboat", relief=RIDGE,)
         self.button1.place(relx=0.25, rely=.05, relwidth=0.2, relheight=0.25)
 
-        self.button2 = Button(self.menuFrame, text="Settings", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button2 = Button(self.menuFrame, text="Settings", bg='cadetblue4', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_settings, relief=RIDGE,)
         self.button2.place(relx=0.42, rely=.05, relwidth=0.2, relheight=0.25)
 
-        self.button3 = Button(self.menuFrame, text="Highscore", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button3 = Button(self.menuFrame, text="Highscore", bg='cadetblue4', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_high_score, relief=RIDGE,)
         self.button3.place(relx=0.59, rely=.05, relwidth=0.2, relheight=0.25)
 
