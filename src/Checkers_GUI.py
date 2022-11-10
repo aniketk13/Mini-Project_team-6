@@ -82,7 +82,7 @@ class Board(Tk):
         self.player1_name = "Player 1"
         self.player2_name = "Player 2"
 
-        self.color1 = "red"
+        self.color1 = "cadetblue4"
         self.color2 = "black"
         self.board_size = 8
         self.empty_rows = 3
@@ -141,7 +141,7 @@ class Board(Tk):
         if menu.mode.get() == 1 or menu.mode.get() == 2:
             self.mode = menu.mode.get()
         if menu.piece_color.get() == 1:
-            self.color1 = "red"
+            self.color1 = "cadetblue4"
             self.color2 = "black"
         elif menu.piece_color.get() == 2:
             self.color1 = "gray67"
@@ -330,7 +330,7 @@ class Board(Tk):
         red_king = PhotoImage(file="red_king_high.gif")
         black_king = PhotoImage(file="black_king_high.gif")
 
-        if self.color1 == "red" and self.color2 == "black":
+        if self.color1 == "cadetblue4" and self.color2 == "black":
             if [x, y] in PlainPiece.pieces_dict[self.current_player]:
                 self.reset_highlighted_piece()
                 self.canvas.itemconfig(piece_ID, outline="yellow")
@@ -368,7 +368,7 @@ class Board(Tk):
         black_king = PhotoImage(file="black_king_high.gif")
 
         # If the piece colors are red and black the king has a special picture
-        if self.color1 == "red" and self.color2 == "black":
+        if self.color1 == "cadetblue4" and self.color2 == "black":
             if [PlainPiece.jump_again_list[0][0], PlainPiece.jump_again_list[0][1]] \
                     in PlainPiece.king_pieces_dict[self.current_player]:
                 self.reset_highlighted_piece()
@@ -423,7 +423,7 @@ class Board(Tk):
 
         if self.highlighted_piece_on_board:
             piece_ID = self.highlighted_piece_on_board[0][0]
-            if self.color1 == "red" and self.color2 == "black":
+            if self.color1 == "cadetblue4" and self.color2 == "black":
                 if [self.highlighted_piece_on_board[0][1], self.highlighted_piece_on_board[0][2]] \
                         in PlainPiece.pieces_dict[self.current_player]:
                     self.canvas.itemconfig(piece_ID, outline="black")
@@ -686,7 +686,7 @@ class Board(Tk):
                 y2 = y1 + self.cell_size
                 if player == 1:
                     # If the selected color is red and black a the kings has a special picture
-                    if self.color1 == "red" and self.color2 == "black":
+                    if self.color1 == "cadetblue4" and self.color2 == "black":
                         piece = self.canvas.create_image(x1, y1, image=red_king, anchor=NW)
                         self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
 
@@ -697,7 +697,7 @@ class Board(Tk):
                         self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
                         self.piece_on_board.append((piece, coordinate[0], coordinate[1]))
                 elif player == 2:
-                    if self.color1 == "red" and self.color2 == "black":
+                    if self.color1 == "cadetblue4" and self.color2 == "black":
                         piece = self.canvas.create_image(x1, y1, image=black_king, anchor=NW)
                         self.canvas.tag_bind(piece, "<ButtonPress-1>", self.on_click)
 
@@ -735,13 +735,13 @@ class Board(Tk):
                 x2 = x1 + self.cell_size
                 y2 = y1 + self.cell_size
                 if player == 1:
-                    if self.color1 == "red" and self.color2 == "black":
+                    if self.color1 == "cadetblue4" and self.color2 == "black":
                         self.canvas.create_image(x1, y1, image=red_king, anchor=NW)
                         self.canvas.photo = red_king
                     else:
                         self.canvas.create_oval(x1, y1, x2, y2, fill=self.color1, outline="black")
                 elif player == 2:
-                    if self.color1 == "red" and self.color2 == "black":
+                    if self.color1 == "cadetblue4" and self.color2 == "black":
                         self.canvas.create_image(x1, y1, image=black_king, anchor=NW)
                         self.canvas.photo = black_king
                     else:
