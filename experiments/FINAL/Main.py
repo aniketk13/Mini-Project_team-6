@@ -2,7 +2,6 @@ from tkinter import *
 from datetime import date
 
 
-
 from PIL import ImageTk,Image #PIL -> Pillow
 from tkinter import messagebox
 
@@ -59,7 +58,7 @@ def rules():
     root.geometry("1800x1180")
 
     Canvas1 = Canvas(root) 
-    Canvas1.config(bg="#0FE9BD")
+    Canvas1.config(bg="#25b89a")
     Canvas1.pack(expand=True,fill=BOTH)
 
     headingFrame1 = Frame(root,bg="black",bd=5)
