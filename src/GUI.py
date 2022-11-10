@@ -14,44 +14,48 @@ class Menu(Frame):
 
         self.menuFrame = Frame(width=240, height=80)
         self.menuFrame.pack(expand=1, fill=BOTH, side=TOP)
-        self.menuFrame.pack_propagate(0)
+        self.menuFrame.place(relx=0.02,rely=0.80,relwidth=0.95,relheight=0.2)
         self.button1 = Button(self.menuFrame, text="Play!", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.start_game, cursor="sailboat", relief=RIDGE,)
-        self.button1.pack()
+        self.button1.place(relx=0.25,rely=.05,relwidth=0.2,relheight=0.25)
 
         self.button2 = Button(self.menuFrame, text="Settings", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_settings, relief=RIDGE,)
-        self.button2.pack()
+        self.button2.place(relx=0.42,rely=.05,relwidth=0.2,relheight=0.25)
 
         self.button3 = Button(self.menuFrame, text="Highscore", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_high_score, relief=RIDGE,)
-        self.button3.pack()
+        self.button3.place(relx=0.59,rely=.05,relwidth=0.2,relheight=0.25)
 
         self.button4 = Button(self.menuFrame, text="Exit", bg='black', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.destroy, cursor="cross", relief=RIDGE,)
-        self.button4.pack()
+        self.button4.place(relx=0.5,rely=.35,relwidth=0.2,relheight=0.25)
+        
 
         self.button5 = Button(self.menuFrame, text="Mute", bg='black', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.muteMusic, cursor="cross", relief=RIDGE,)
-        self.button5.pack()
+       
+        self.button5.place(relx=0.76,rely=.05,relwidth=0.2,relheight=0.25)
 
-        self.settingsFrame = Frame(width=220, height=100)
+
+
+        self.settingsFrame = Frame(width=20, height=50)
 
         self.labelNames1 = Label(self.settingsFrame, text="Player Names",
-                                 bg="black", fg="white", font="bold", relief=RIDGE)
+                                 bg="black", fg="white", font="bold")
         self.labelNames1.grid(row=0, column=1, sticky=W)
         self.labelNames2 = Label(
-            self.settingsFrame, text="Player 1", bg="black", fg="white", font="bold")
-        self.labelNames2.grid(row=1, column=0, sticky=W)
+            self.settingsFrame, text="Player 1", bg="cadetblue4", fg="white", font="bold")
+        self.labelNames2.grid(row=2, column=0, sticky=W)
         self.labelNames3 = Label(
             self.settingsFrame, text="Player 2", bg="black", fg="white", font="bold")
-        self.labelNames3.grid(row=2, column=0, sticky=W)
-        self.nameEntry1 = Entry(self.settingsFrame, width=12)
-        self.nameEntry1.grid(row=1, column=1, sticky=W)
+        self.labelNames3.grid(row=4, column=0, sticky=W)
+        self.nameEntry1 = Entry(self.settingsFrame, width=19)
+        self.nameEntry1.grid(row=2, column=1, sticky=W)
         self.nameEntry1.rowconfigure(1, pad=2)
-        self.nameEntry2 = Entry(self.settingsFrame, width=12)
-        self.nameEntry2.grid(row=2, column=1, sticky=W)
-        self.nameEntry1.rowconfigure(2, pad=2)
+        self.nameEntry2 = Entry(self.settingsFrame, width=19)
+        self.nameEntry2.grid(row=4, column=1, sticky=W)
+        self.nameEntry1.rowconfigure(4, pad=2)
 
         self.settingsFrame.pack_forget()
 
@@ -66,7 +70,7 @@ class Board(Tk):
     ''' A class for creating the board, the high score box and the instructions text box and their associated methods.
     '''
 
-    def __init__(self, width=800, height=770, cell_size=95):
+    def __init__(self, width=700, height=700, cell_size=70):
         Tk.__init__(self)
         self.cell_size = cell_size
         self.canvas = Canvas(self, width=width, height=height)
@@ -75,12 +79,12 @@ class Board(Tk):
         self.textFrame = Frame(width=200, height=20)
         self.textFrame.pack(expand=1, fill=BOTH, side=RIGHT)
         self.textForUser = Text(self.textFrame, width=20, height=4,
-                                bg="black", fg='white', font=("verdana", "18"), wrap=WORD)
-        self.textForUser.pack()
+                                bg="black", fg='white', font=("verdana", "14"), wrap=WORD)
+        self.textForUser.place(relx=0.01,rely=0.6,relwidth=0.9)
         self.textForUser.insert(END, "Welcome to checkers!")
         self.textForUser.config(state=DISABLED)
 
-        self.highScoreText = Text(self.textFrame, width=23, height=30,
+        self.highScoreText = Text(self.textFrame, width=17, height=15,
                                   bg='black', fg='white', font=("verdana", "16"), wrap=WORD)
 
         self.player1_name = "Player 1"
@@ -203,6 +207,7 @@ class Board(Tk):
 
             self.highScoreText.config(state=NORMAL)
             self.highScoreText.delete(0.0, END)
+            self.highScoreText.insert(END, "HIGHSCORES \n\n", "e")
            
             self.highScoreText.tag_configure("e", underline=1)
 
@@ -799,6 +804,7 @@ def run():
 
     board.print_background_board()
     board.print_start_board()
+    board.resizable(0, 0)
     menu.mainloop()
     board.mainloop()
 

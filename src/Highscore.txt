@@ -2,3 +2,4 @@ Pritesh 8x8 18
 aman 8x8 195
 aniket 8x8 374
 A 8x8 285
+Pritesh 8x8 266
