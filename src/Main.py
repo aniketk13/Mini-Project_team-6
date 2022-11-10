@@ -48,7 +48,7 @@ headingLabel.place(relx=0, rely=0, relwidth=1, relheight=1)
 def game():
 
    # root.quit()
-    import Checkers_GUI
+    import GUI
 
 
 def rules():
