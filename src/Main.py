@@ -1,6 +1,7 @@
 from tkinter import *
 from datetime import date
 
+
 from PIL import ImageTk,Image #PIL -> Pillow
 from tkinter import messagebox
 
@@ -10,6 +11,7 @@ root.minsize(width=1000,height=800)
 root.geometry("1800x1180")
 same=True
 n=2.2
+
 
 # Adding a background image
 background_image =Image.open("Checkers_image.JPG")
@@ -25,7 +27,7 @@ background_image = background_image.resize((newImageSizeWidth,newImageSizeHeight
 img = ImageTk.PhotoImage(background_image)
 Canvas1 = Canvas(root)
 Canvas1.create_image(1100,530,image = img)      
-Canvas1.config(bg="white",width = newImageSizeWidth, height = newImageSizeHeight)
+Canvas1.config(bg="black",width = newImageSizeWidth, height = newImageSizeHeight)
 Canvas1.pack(expand=True,fill=BOTH)
 
 headingFrame1 = Frame(root,bg="red",bd=5)
@@ -34,7 +36,14 @@ headingLabel = Label(headingFrame1, text="CHECKERS", bg='black', fg='red', font=
 headingLabel.place(relx=0,rely=0, relwidth=1, relheight=1)
 
 def tries():
-    print("HELLO")
+    
+   # root.quit()
+    import Checkers_GUI
+    
+    
+            
+   
+    
 
 def rules():
     
@@ -47,7 +56,7 @@ def rules():
     root.geometry("1800x1180")
 
     Canvas1 = Canvas(root) 
-    Canvas1.config(bg="#0FE9BD")
+    Canvas1.config(bg="#25b89a")
     Canvas1.pack(expand=True,fill=BOTH)
 
     headingFrame1 = Frame(root,bg="black",bd=5)
@@ -95,15 +104,14 @@ def rules():
 
 # adding buttons
 
-btn1 = Button(root,text="Play Game",bg='black', fg='white',font=('Courier',60), command=tries)
+btn1 = Button(root,text="Play Game",bg='black', fg='white',font=('Courier',60), command=lambda:[root.destroy(),tries()])
 btn1.place(relx=0.35,rely=0.39, relwidth=0.35,relheight=0.1)
     
 btn2 = Button(root,text="RULES",bg='black', fg='white',font=('Courier',60), command=rules)
 btn2.place(relx=0.35,rely=0.59, relwidth=0.35,relheight=0.1)
-    
+ 
 btn3 = Button(root,text="ABOUT",bg='black', fg='white',font=('Courier',60), command=tries)
 btn3.place(relx=0.35,rely=0.79,relwidth=0.35,relheight=0.1)
-
 
 root.mainloop()
 
