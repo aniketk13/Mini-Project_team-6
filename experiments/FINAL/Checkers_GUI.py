@@ -54,8 +54,9 @@ class Menu(Frame):
         self.labelSize.grid(row=9, column=1, sticky=W)
         self.radioButtonSize1 = Radiobutton(self.settingsFrame, text="8x8", variable=self.board_size_, value=8)
         self.radioButtonSize1.grid(row=10, column=1, sticky=W)
+        '''
         self.radioButtonSize2 = Radiobutton(self.settingsFrame, text="10x10", variable=self.board_size_, value=10)
-        self.radioButtonSize2.grid(row=11, column=1, sticky=W)
+        self.radioButtonSize2.grid(row=11, column=1, sticky=W) '''
 
         self.piece_color = IntVar()
 
@@ -111,7 +112,7 @@ class Board(Tk):
         # Stores the reference variables for the king pieces pictures
         self.reference_dict = {}
 
-        # This variable is assigned to 1 if the mode is player vs player and if it's player vs AI then it's 2
+        # This variable is assigned to 1 if the mode is player vs player and if it's player vs AI then it's 2(version 2)
         self.mode = 1
 
         # Which player turn it is

@@ -111,9 +111,10 @@ btn1.place(relx=0.35,rely=0.39, relwidth=0.35,relheight=0.1)
     
 btn2 = Button(root,text="RULES",bg='black', fg='white',font=('Courier',60), command=rules)
 btn2.place(relx=0.35,rely=0.59, relwidth=0.35,relheight=0.1)
-    
+'''  
 btn3 = Button(root,text="ABOUT",bg='black', fg='white',font=('Courier',60), command=tries)
 btn3.place(relx=0.35,rely=0.79,relwidth=0.35,relheight=0.1)
+'''
 
 
 root.mainloop()
