@@ -14,30 +14,28 @@ class Menu(Frame):
 
         self.menuFrame = Frame(width=240, height=80)
         self.menuFrame.pack(expand=1, fill=BOTH, side=TOP)
-        self.menuFrame.place(relx=0.02,rely=0.80,relwidth=0.95,relheight=0.2)
+        self.menuFrame.place(relx=0.02, rely=0.80,
+                             relwidth=0.95, relheight=0.2)
         self.button1 = Button(self.menuFrame, text="Play!", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.start_game, cursor="sailboat", relief=RIDGE,)
-        self.button1.place(relx=0.25,rely=.05,relwidth=0.2,relheight=0.25)
+        self.button1.place(relx=0.25, rely=.05, relwidth=0.2, relheight=0.25)
 
         self.button2 = Button(self.menuFrame, text="Settings", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_settings, relief=RIDGE,)
-        self.button2.place(relx=0.42,rely=.05,relwidth=0.2,relheight=0.25)
+        self.button2.place(relx=0.42, rely=.05, relwidth=0.2, relheight=0.25)
 
         self.button3 = Button(self.menuFrame, text="Highscore", bg='cadetblue4', fg='lightgrey', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.show_high_score, relief=RIDGE,)
-        self.button3.place(relx=0.59,rely=.05,relwidth=0.2,relheight=0.25)
+        self.button3.place(relx=0.59, rely=.05, relwidth=0.2, relheight=0.25)
 
         self.button4 = Button(self.menuFrame, text="Exit", bg='black', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.destroy, cursor="cross", relief=RIDGE,)
-        self.button4.place(relx=0.5,rely=.35,relwidth=0.2,relheight=0.25)
-        
+        self.button4.place(relx=0.5, rely=.35, relwidth=0.2, relheight=0.25)
 
         self.button5 = Button(self.menuFrame, text="Mute", bg='black', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.muteMusic, cursor="cross", relief=RIDGE,)
-       
-        self.button5.place(relx=0.76,rely=.05,relwidth=0.2,relheight=0.25)
 
-
+        self.button5.place(relx=0.76, rely=.05, relwidth=0.2, relheight=0.25)
 
         self.settingsFrame = Frame(width=20, height=50)
 
@@ -67,11 +65,17 @@ class Menu(Frame):
 
 
 class Board(Tk):
+
     ''' A class for creating the board, the high score box and the instructions text box and their associated methods.
     '''
 
     def __init__(self, width=700, height=700, cell_size=70):
         Tk.__init__(self)
+        self.countmute = 0
+        pygame.init()
+        mixer.init()
+        mixer.music.load('bgmusic.mp3')
+        mixer.music.play()
         self.cell_size = cell_size
         self.canvas = Canvas(self, width=width, height=height)
         self.canvas.pack(expand=1, side=RIGHT)
@@ -80,7 +84,7 @@ class Board(Tk):
         self.textFrame.pack(expand=1, fill=BOTH, side=RIGHT)
         self.textForUser = Text(self.textFrame, width=20, height=4,
                                 bg="black", fg='white', font=("verdana", "14"), wrap=WORD)
-        self.textForUser.place(relx=0.01,rely=0.6,relwidth=0.9)
+        self.textForUser.place(relx=0.01, rely=0.6, relwidth=0.9)
         self.textForUser.insert(END, "Welcome to checkers!")
         self.textForUser.config(state=DISABLED)
 
@@ -208,7 +212,7 @@ class Board(Tk):
             self.highScoreText.config(state=NORMAL)
             self.highScoreText.delete(0.0, END)
             self.highScoreText.insert(END, "HIGHSCORES \n\n", "e")
-           
+
             self.highScoreText.tag_configure("e", underline=1)
 
             for times in range(len(time_list_8)):
@@ -235,7 +239,12 @@ class Board(Tk):
         return
 
     def muteMusic(self):
-        mixer.music.stop()
+        if(self.countmute == 0):
+            mixer.music.stop()
+            self.countmute = 1
+        elif(self.countmute == 1):
+            mixer.music.play()
+            self.countmute = 0
 
     def player_turn_text(self):
         '''Writes which player turn it is to move.

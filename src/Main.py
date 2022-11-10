@@ -8,10 +8,7 @@ from pygame import mixer
 from PIL import ImageTk, Image  # PIL -> Pillow
 from tkinter import messagebox
 
-pygame.init()
-mixer.init()
-mixer.music.load('bgmusic.mp3')
-mixer.music.play()
+
 root = Tk()
 root.title("Library")
 root.minsize(width=1000, height=800)
