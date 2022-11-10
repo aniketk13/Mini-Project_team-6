@@ -32,7 +32,7 @@ class Menu(Frame):
                               command=board.destroy, cursor="cross", relief=RIDGE,)
         self.button4.place(relx=0.5, rely=.35, relwidth=0.2, relheight=0.25)
 
-        self.button5 = Button(self.menuFrame, text="Sound", bg='black', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
+        self.button5 = Button(self.menuFrame, text="Sound Off", bg='black', fg='white', font=("Helvetica", "14", "bold"), width=19, height=4,
                               command=board.muteMusic, cursor="cross", relief=RIDGE,)
 
         self.button5.place(relx=0.76, rely=.05, relwidth=0.2, relheight=0.25)
@@ -240,9 +240,11 @@ class Board(Tk):
 
     def muteMusic(self):
         if(self.countmute == 0):
+            Menu().button5.config(text="Sound On")
             mixer.music.stop()
             self.countmute = 1
         elif(self.countmute == 1):
+            Menu().button5.config(text="Sound Off")
             mixer.music.play()
             self.countmute = 0
 
