@@ -1,4 +1,4 @@
-BestPlayer 8x8 27
-a 8x8 195
-a 8x8 374
+Pritesh 8x8 18
+aman 8x8 195
+aniket 8x8 374
 A 8x8 285

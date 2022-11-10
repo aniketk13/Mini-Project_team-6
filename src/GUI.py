@@ -203,7 +203,7 @@ class Board(Tk):
 
             self.highScoreText.config(state=NORMAL)
             self.highScoreText.delete(0.0, END)
-            self.highScoreText.insert(END, "8x8\n", "e")
+           
             self.highScoreText.tag_configure("e", underline=1)
 
             for times in range(len(time_list_8)):
