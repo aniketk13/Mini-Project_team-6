@@ -14,7 +14,8 @@ This project is simple networked multiplayer Checkers game.
 
 Project is created with:
  * python:Python 2.7, or Python 3.5 or newer
- * pycharm:2022.2.3
+ * pycharm
+ * tkinter
 
  ## Features
 
