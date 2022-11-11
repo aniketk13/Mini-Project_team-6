@@ -21,7 +21,7 @@ Project is created with:
  * Two human players will play.
  * Computer will decide the valid move.
  * Computer  detect and declare the winner.
-
+* version 2
  * It should be possible to save intermediate state of the game and resume the game from this saved state.
  * Allow players to select variation at the start of play.
 * Two players will play over local networks.
