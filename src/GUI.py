@@ -694,7 +694,7 @@ class Board(Tk):
                 x2 = x1 + self.cell_size
                 y2 = y1 + self.cell_size
                 if player == 1:
-                    piece = self.canva(
+                    piece = self.canvas.create_oval(
                         x1, y1, x2, y2, fill=self.color1, outline="black")
                     self.canvas.tag_bind(
                         piece, "<ButtonPress-1>", self.on_click)
