@@ -204,7 +204,7 @@ class PlainPiece:
                         PlainPiece.AI_check_moves_dict[self.player].clear()
                         PlainPiece.AI_check_jump_moves_dict[self.player].clear()
                 else:
-                    raise EnvironmentError("You must take a piece if you can!mandatory jump")
+                    raise EnvironmentError("Mandatory jump")
             elif [new_x, new_y] in self.valid_jump_moves():
                 self.check_which_piece_captured(new_x, new_y)
                 if self.player == 1 and new_y == 0:
@@ -223,9 +223,9 @@ class PlainPiece:
                 PlainPiece.AI_check_moves_dict[self.player].clear()
                 PlainPiece.AI_check_jump_moves_dict[self.player].clear()
             else:
-                raise ValueError("That is not a valid move!")
+                raise ValueError("Oops!Invalid Move")
         else:
-            raise TypeError("You must select a piece of your own!")
+            raise TypeError("Select a piece of your own!")
         return
 
 

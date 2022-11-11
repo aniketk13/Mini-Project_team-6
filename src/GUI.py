@@ -83,7 +83,7 @@ class Board(Tk):
         self.textFrame = Frame(width=200, height=20)
         self.textFrame.pack(expand=1, fill=BOTH, side=RIGHT)
         self.textForUser = Text(self.textFrame, width=20, height=4,
-                                bg="black", fg='white', font=("verdana", "14"), wrap=WORD)
+                                bg="black", fg='white', font=("Times new roman", "14"), wrap=WORD)
         self.textForUser.place(relx=0.01, rely=0.6, relwidth=0.9)
         self.textForUser.insert(END, "Welcome to checkers!")
         self.textForUser.config(state=DISABLED)
@@ -261,13 +261,13 @@ class Board(Tk):
                     self.player1_name = menu.nameEntry1.get()
                     if self.player1_name[-1] == "s":
                         self.enter_text_for_user(
-                            "It is " + str(self.player1_name) + "' turn to move")
+                            "It is " + str(self.player1_name) + "' turn")
                     else:
                         self.enter_text_for_user(
-                            "It is " + str(self.player1_name) + "'s turn to move")
+                            "It is " + str(self.player1_name) + "'s turn ")
                 else:
                     self.enter_text_for_user(
-                        "It is " + str(self.player1_name) + "'s turn to move")
+                        "It is " + str(self.player1_name) + "'s turn ")
 
         else:
             if self.mode == 1 or self.mode == 3:
@@ -275,13 +275,13 @@ class Board(Tk):
                     self.player2_name = menu.nameEntry2.get()
                     if self.player2_name[-1] == "s":
                         self.enter_text_for_user(
-                            "It is " + str(self.player2_name) + "' turn to move")
+                            "It is " + str(self.player2_name) + "' turn ")
                     else:
                         self.enter_text_for_user(
-                            "It is " + str(self.player2_name) + "'s turn to move")
+                            "It is " + str(self.player2_name) + "'s turn ")
                 else:
                     self.enter_text_for_user(
-                        "It is " + str(self.player2_name) + "'s turn to move")
+                        "It is " + str(self.player2_name) + "'s turn ")
         return
 
         return
